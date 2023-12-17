@@ -1,0 +1,51 @@
+# site settings
+title: Zachary Alves
+subtitle: Portfolio
+email: zacharyalves2024@u.northwestern.edu
+description: 
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://alves-zach.github.io/" # the base hostname & protocol for your site
+author:
+street_address:
+city: Chicago
+state: IL
+zip_code:
+country: United States of America
+phone: (720) 215-1442
+contact_form_id: xeqdvdwn
+
+# homepage tiles
+tiles-source: projects # accepts "posts" or "pages" or "projects"
+tiles-count: 10
+
+# social settings (key must match name of font awesome icon)
+# see https://fontawesome.com/icons?d=gallery&p=2&s=brands
+# Icons are not shown if value is empty
+# You need to restart jekyll for changes to have an effect
+socials:
+  LinkedIn: linkedin.com/in/zachary-alves-b186b2159
+  GitHub: https://github.com/Alves-Zach
+  GitLab:
+  Google-Plus:
+  Instagram:
+  Twitter: 
+  Facebook:
+  Slack:
+
+# build settings
+markdown: kramdown
+
+sass:
+  style: compressed
+
+collections:
+  projects:
+    output: true
+    permalink: /:collection/:path/
+
+exclude:
+- "*.gemspec"
+- LICENSE.md
+- CONTRIBUTING.md
+- README.md
+- _reference/

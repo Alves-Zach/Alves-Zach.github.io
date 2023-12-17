@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+{% include head.html %}
+
+<body>
+
+    {% include header.html %}
+
+    <!-- Banner -->
+    <section id="banner">
+    <!-- <section id="banner" class="major"> -->
+        <div class="inner">
+            <!--<header class="major">
+                <h1>{{ page.landing-title }}</h1>
+            </header>-->
+            <div class="content">
+                <a href="about.html"><img src="{{ site.baseurl }}/assets/images/headshot.png" alt="About Me" /></a>
+                <p>{{ site.description }}</p>
+                <!--<p style="text-transform: uppercase;">{{ site.description }}</p>-->
+                <!-- <ul class="actions">
+                    <li><a href="#one" class="button scrolly">Projects</a></li>
+                </ul> -->
+                <ul class="actions">
+                    <li><a href="about.html" class="button">About Me</a></li>
+                </ul>
+                <ul class="actions">
+                    <li><a href="resume.html" class="button">Resume</a></li>
+                </ul>
+                <ul class="actions">
+                    <li><a href="contact.html" class="button">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    
+    <!-- Main -->
+    <div id="main">
+        
+        <section id="breaksection">
+            <svg width="100%" height="100%">
+                <rect width="100%" height="1%"/>
+            </svg>
+        </section>
+        
+        <!-- One -->
+        <!--
+        <section id="one">
+            
+                <div class="inner">
+                    <section>
+                        <p>{{ content }}</p>
+                        <ul class="actions">
+                            <li><a href="about.html" class="button next">About Me</a></li>
+                        </ul>
+                        <header class="major">
+                            <h2>Projects</h2>
+                        </header>
+                    </section>
+                </div>
+            
+        </section>
+        -->
+
+        <!-- Two -->
+        {% include tiles.html %}
+
+        <section id="breaksection">
+            <svg width="100%" height="100%">
+                <rect width="100%" height="1%"/>
+            </svg>
+        </section>
+    </div>
+    <div id="allprojectsbutton">
+        <ul class="actions">
+            <li><a href="projects.html" class="button next">All Projects</a></li>
+        </ul>
+    </div>
+
+    {% include footer.html %}
+
+</body>
+
+</html>
