@@ -38,6 +38,9 @@ markdown: kramdown
 sass:
   style: compressed
 
+plugins:
+  - jekyll-include-cache
+
 collections:
   projects:
     output: true
