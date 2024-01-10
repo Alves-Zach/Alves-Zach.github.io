@@ -9,9 +9,9 @@ nav-menu: true
 
 ### Zachary Alves
 
-I graduated from Purdue University in 2019 with a B.S. in Mechanical Engineering and minors in Electrical & Computer Engineering and Spanish. After graduating I spent 3 years consulting in the industrial automation space for DMC, Inc. During my time with DMC, I architected and wrote controls software for several high-profile clients in sectors including electric car/battery manufacturing, high speed transportation, cell therapy manufacturing, metalworking, and more.
+I earned a Mechanical Engineering bachelor's degree from Colorado State University in 2022 with a minor in computer science. I worked with Lincoln Electric Automation for a year where I demonstrate system features and effectiveness to customers for six axis robotic welding systems as well as customized robot manipulation programs to provide customers with exceptional system effeciency and weld quality.
 
-My passion to continue working with cutting edge technologies in the software, electrical, and mechanical realms led me to pursue a Master’s in Robotics at Northwestern University. While at Northwestern, I worked with a myriad of robotic technologies, including robotic manipulation, SLAM, autonomous navigation, and machine learning. I graduated with my M.S. in Robotics in December 2023.
+I'm currently aiming to expand my knowledge about the software and mechanical aspects of robots via a Master's of Robotics at Northwestern University. Through this program I have been able to utilize cutting edge robotic hardware and software in fields like SLAM and robotic manipulation. I will complete my Master's in December of 2024.
 
 {:refdef: style="text-align: center;"}
 <div class="inner">
