@@ -13,6 +13,13 @@ As our final project for my embedded systems in robotics class at Northwestern U
 
 Alongside the ABB robots, we created a user-end virtual simulation of the environment utilizing **RVIZ** and **Gazebo** where the user could wear a **Haptics** glove and have a third ABB arm attached to their wrist.
 
+{:refdef: style="text-align: center;"}
+![The transforms of each ring shown in RVIZ](/assets/images/shadowhands/BlockDiagram.png){: width="50%"}
+{: refdef}
+{:refdef: style="text-align: center;"}
+_The transforms of each ring shown in RVIZ._
+{: refdef}
+
 {% details **<u>Table of Contents</u>** %}
 - [Manipulator End](#manipulator-end)
 - [User End](#user-end)
