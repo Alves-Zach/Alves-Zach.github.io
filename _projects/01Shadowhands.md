@@ -2,7 +2,7 @@
 layout: project
 title: Shadowhands
 description: Python, ROS 2, Gazebo
-image: assets/images/attack-of-the-franka/main.gif
+image: assets/images/shadowhands/main.gif
 imagewidth: 0
 order: 989
 ---
@@ -12,10 +12,6 @@ order: 989
 As our final project for my embedded systems in robotics class at Northwestern University my team decided to utilize the **Shadow Hand** robot hands attached to ABB seven-DOF robot arms to manipulate objects detected via computer vision.
 
 Alongside the ABB robots, we created a user-end virtual simulation of the environment utilizing **RVIZ** and **Gazebo** where the user could wear a **Haptics** glove and have a third ABB arm attached to their wrist.
-
-{% include youtube.html video_id="bU8aNL9BQdQ" width="75%" %}
-
-<br>
 
 {% details **<u>Table of Contents</u>** %}
 - [Manipulator End](#manipulator-end)
@@ -29,6 +25,13 @@ Alongside the ABB robots, we created a user-end virtual simulation of the enviro
 The manipulator end has both a computer vision and robotic manipulator portion to it. The computer vision side detects the locations of the toy rings on the desk and sends those positions to the motion planner that creates a series of actions for the robotic arm to execute to pick up the rings in order.
 
 The computer vision on this end of the project utilizes color detection to detect which pixels corrispond to which ring. Then using other CV methods such as contouring, more accurately determines the edges of each rings, then the center of each ring based on the average location of pixels of the same color as the rings.
+
+{:refdef: style="text-align: center;"}
+![The transforms of each ring shown in RVIZ](/assets/images/shadowhands/cv.png){: width="50%"}
+{: refdef}
+{:refdef: style="text-align: center;"}
+_The transforms of each ring shown in RVIZ._
+{: refdef}
 
 Once the ring locations are known relative to the camera, known positions and rotations from the camera to the robot base are used to compute the locations of the rings relative to the robot. These locations are then sent to the motion planner to create a series of actions that will pick up each ring in order and stack them on the post in the center of the desk.
 
@@ -53,15 +56,15 @@ _The corisponding gazebo simulation using my hand and finger motions as input._
 
 ## Future Work
 
-{% details **1. Improving motion planning robustness.** %}
+{% details **1. Improving controller tuning.** %}
 
-The most impactful future improvement to this project would be to increase the robustness of the motion planning algorithms. With arbitrary enemy and ally positions, there are many scenarios and edge cases, not all of which the team was able to test. Planning for more of these edge cases and better defining specific motions to handle them would improve the performance of the system. Adding even more possible attack styles could also reduce the number of enemies that are unreachable due to configuration of allies in the work area.
+While the physics simulator is very good at simulating freely moving objects such as the rings, the controller that moves the hand around the scene would need tuning before the project could actually be used in an actual scenario. Though tuning the controller was out of scope for a project this size, ROS contains tools to tune controllers and gazebo has the capability to make the hand model more accurate so that the random flipping wouldn't occur.
 
 {% enddetails %}
 
-{% details **2. Adding more object detection methods.** %}
+{% details **2. Saving user input motion for future playback** %}
 
-This project was based on color detection as a central method of detecting and differentiating object types. It would be an exciting challenge to expand this object detection capability. For example, one could use [YOLO](https://pjreddie.com/darknet/yolo/) or other neural networks to analyze the image and detect multiple different types of objects that represent allies and enemies based on a training dataset.
+Future iterations of this project would almost need to include trajectory storing so that it could be run later on the manipulator end of the project. For example, if the user makes a mistake in their execution, that motion data could simply be deleted and not sent to the manipulator end, where as a directly controlled manipulator would be more prone to user errors.
 
 {% enddetails %}
 

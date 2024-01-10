@@ -2,8 +2,6 @@
 layout: post
 title: About Me
 description:
-image: assets/images/about/main.jpg
-imagewidth: 90%
 nav-menu: true
 ---
 
