@@ -2,16 +2,14 @@
 layout: project
 title:  2D Physics Simulation
 description: Python, Dynamics 
-image: assets/images/MECH449FinalProject/main.gif
+image: assets/images/MECH314FinalProject/main.gif
 imagewidth: 0
 order: 989
 ---
 
-[GitHub Repository](https://github.com/Alves-Zach/NU-MECH449-Final){:target="_blank"}
+[GitHub Repository](https://github.com/Alves-Zach/NU-MECH314-Final){:target="_blank"}
 
-For the final project of MECH 449 robotic manipulation we were tasked with writing a controller to plan both chassis and arm movements of a mobile manipulator movement. The control scheme aims to minimize error, where error is the distance from the current arm and chassis locations to the "perfect" arm and chassis locations.
-
-Three types of control schemes were required for this project to demonstrate our understanding of control systems inputs and how they affect the error of a system over time.
+Our final project for MECH 314 Machine Dynamics was to program a physics simulation with collision from scratch in Python. The simulation had to have two square bodies and both bodies collide with each other multiple times and on multiple sides to demonstrate the robustness of our simulator.
 
 {% include youtube.html video_id="7w1IAbZ1y34" width="50%" %}
 {:refdef: style="text-align: center;"}
@@ -19,9 +17,9 @@ _The corresponding gazebo simulation using my hand and finger motions as input._
 {: refdef}
 
 {% details **<u>Table of Contents</u>** %}
-- [Frames](#Frames)
-- [Lagrangian Dynamics](#Lagrangian-Dynamics)
-- [External forces](#External-forces)
+- [Frames](#frames)
+- [Lagrangian Dynamics](#lagrangian-dynamics)
+- [External forces](#external-forces)
 {% enddetails %}
 
 ****
@@ -33,7 +31,7 @@ For this simulation I kept track of the location of 4 frames on the die's corner
 The dynamics of the system were simulated using the Euler-Lagrange equations of motion shown below.
 
 {:refdef: style="text-align: center;"}
-![Euler Lagrange Equations for basic motion.](/assets/images/MECH314FinalProject/EulerLagrangeEquation.png){: width="50%"}
+![Euler Lagrange Equations for basic motion.](/assets/images/MECH314FinalProject/EulerLagrangeEquation.png)
 {: refdef}
 {:refdef: style="text-align: center;"}
 _Euler Lagrange Equations for basic motion._
@@ -42,7 +40,7 @@ _Euler Lagrange Equations for basic motion._
 Once a collision was detected, the equations below were used to determine the location and speed of the colliding objects the time instance directly after the collision. 
 
 {:refdef: style="text-align: center;"}
-![Collision update equations.](/assets/images/MECH314FinalProject/CollisionEquations.png){: width="50%"}
+![Collision update equations.](/assets/images/MECH314FinalProject/CollisionEquations.png)
 {: refdef}
 {:refdef: style="text-align: center;"}
 _Equation to use when a collision is detected_
