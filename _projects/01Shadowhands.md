@@ -9,9 +9,9 @@ order: 989
 
 [GitHub Repository](https://github.com/ME495-EmbeddedSystems/final-project-teleop){:target="_blank"}
 
-As our final project for my Embedded Systems in Robotics class at Northwestern University my team decided to utilize the **Shadow Hand** robot hands attached to ABB seven-DOF robot arms to manipulate objects detected via computer vision.
+As our final project for my Embedded Systems in Robotics class at Northwestern University my team decided to utilize the **Shadow Hand** robot hands attached to **ABB** seven-DOF robot arms to manipulate objects detected via computer vision.
 
-Alongside the ABB robots, we created a user-end virtual simulation of the environment utilizing **RVIZ** and **Gazebo** where the user could wear a **Haptics** glove and have a third ABB arm attached to their wrist.
+Alongside the **ABB** robots, we created a user-end virtual simulation of the environment utilizing **RVIZ** and **Gazebo** where the user could wear a **Haptics** glove and have a **Franka** arm attached to their wrist.
 
 {:refdef: style="text-align: center;"}
 ![The transforms of each ring shown in RVIZ](/assets/images/shadowhands/BlockDiagram.png){: width="50%"}

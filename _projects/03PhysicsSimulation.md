@@ -13,7 +13,7 @@ Our final project for MECH 314 Machine Dynamics was to program a physics simulat
 
 {% include youtube.html video_id="zbDKalFRUCY" width="50%" %}
 {:refdef: style="text-align: center;"}
-_The corresponding gazebo simulation using my hand and finger motions as input._
+_The final simulation demo._
 {: refdef}
 
 {% details **<u>Table of Contents</u>** %}
