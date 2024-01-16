@@ -65,10 +65,10 @@ _The corresponding gazebo simulation using my hand and finger motions as input._
 
 ## Future Work
 
-# **Improving controller tuning.**
+### **Improving controller tuning.**
 
 While the physics simulator is very good at simulating freely moving objects such as the rings, the controller that moves the hand around the scene would need tuning before the project could be used in an actual scenario. Though tuning the controller was out of scope for a project this size, **ROS2** contains tools to tune controllers and **Gazebo** has the capability to make the hand model more accurate so that the random flipping wouldn't occur.
 
-# **Saving user input motion for future playback**
+### **Saving user input motion for future playback**
 
 Future iterations of this project would need to include trajectory storing so that it could be run later on the manipulator end of the project. For example, if the user makes a mistake in their execution, that motion data could simply be deleted and not sent to the manipulator end, where as a directly controlled manipulator would be more prone to user errors.
