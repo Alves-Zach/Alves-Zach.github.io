@@ -39,10 +39,10 @@ The image above shows that my model both recognizes that this sign means slow an
 
 
 ## Robot Control
-The robot that was chosen for this project was an [**Interbotix px100**](https://www.trossenrobotics.com/pincherx-100-robot-arm.aspx){:target="_blank"}.
+The robot that was chosen for this project was an [**Interbotix PX100**](https://www.trossenrobotics.com/pincherx-100-robot-arm.aspx){:target="_blank"}.
 This robot was chosen for its ease of use and size compared to the dial that controlled the train’s speed. Each time a command came from the sign-detecting portion of the controller each of the different joints of the robot were commanded to move to positions that would adjust the dial to the desired speed or to press the track switching button.
 
-Due to the robot's limited degrees of freedom, a handle was made for the dial that controlled the speed of the train which allowed the robot to more easily grasp it. The speed controller dial combined with a button on the right side of the setup can control both the speed of the train and the desired track of travel. A plate was 3D-printed to fix the distance between the px100, the dial, and the track-switching button. The full 3D-printed setup can be seen below.
+Due to the robot's limited degrees of freedom, a handle was made for the dial that controlled the speed of the train which allowed the robot to more easily grasp it. The speed controller dial combined with a button on the right side of the setup can control both the speed of the train and the desired track of travel. A plate was 3D-printed to fix the distance between the PX100, the dial, and the track-switching button. The full 3D-printed setup can be seen below.
 
 {:refdef: style="text-align: center;"}
 ![Full robot train controller setup](/assets/images/TrainController/RobotSetup.png){: width="50%"}
