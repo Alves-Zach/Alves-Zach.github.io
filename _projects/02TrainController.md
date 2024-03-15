@@ -19,7 +19,7 @@ _A full demo of the train controller, showing Rviz, the train's perspective, and
 ****
 
 ## Data Pipeline
-A **Raspberry pi** attached to the train’s second car transmits raw image data to the computer that processes that data and determines which signs are present in each frame of the video feed. **FFMPEG** was utilized as a lightweight way to transmit data over the network from one device to another with relatively low latency. **Raspberry pi**’s have built-in hardware to do h264 encoding, so by using a USB webcam that supports that encoding, as well as other **FFMPEG** optimizations, a latency of 0.2 seconds was achieved which allowing for fairly quick reaction times from camera to computer. From the raw images, image recognition was used to determine which traffic signs were present, and therefore, which commands to send to the robot.
+A **Raspberry Pi** attached to the train’s second car transmits raw image data to the computer that processes that data and determines which signs are present in each frame of the video feed. **FFMPEG** was utilized as a lightweight way to transmit data over the network from one device to another with relatively low latency. **Raspberry Pi**’s have built-in hardware to do h264 encoding, so by using a USB webcam that supports that encoding, as well as other **FFMPEG** optimizations, a latency of 0.2 seconds was achieved which allowing for fairly quick reaction times from camera to computer. From the raw images, image recognition was used to determine which traffic signs were present, and therefore, which commands to send to the robot.
 
 {:refdef: style="text-align: center;"}
 ![The Block Diagram showing the flow of data and commands](/assets/images/TrainController/BlockDiagram.png){: width="50%"}
