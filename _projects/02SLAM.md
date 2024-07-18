@@ -2,7 +2,7 @@
 layout: project
 title: SLAM
 description: C++, ROS 2, Rviz
-image: assets/images/shadowhands/main.gif
+image: assets/images/shadowhands/Demo.gif
 imagewidth: 0
 order: 989
 ---
