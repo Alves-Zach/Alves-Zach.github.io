@@ -7,7 +7,7 @@ imagewidth: 0
 order: 989
 ---
 
-[GitHub Repository](https://github.com/ME495-Navigation/slam-project-Alves-Zach){:target="_blank"}
+[GitHub Repository](https://github.com/Alves-Zach/SLAM.git){:target="_blank"}
 
 As part of my Master's program at Northwestern University I had 10 weeks to implement a **SLAM** (Simultaneous Localization And Mapping) algorithm from scratch. **SLAM** involves using sensors onboard a vehicle to detect landmarks to create a map of the surroundings and make traversing the environment easier.
 
