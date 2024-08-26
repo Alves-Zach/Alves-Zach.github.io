@@ -2,7 +2,7 @@
 layout: project
 title: Exoskeleton control
 description: Python, C++, ROS Noetic, IMU, EMG
-image: assets/images/SLAM/Demo.gif
+image: assets/images/exoskeleton/demo.gif
 imagewidth: 0
 order: 989
 ---
