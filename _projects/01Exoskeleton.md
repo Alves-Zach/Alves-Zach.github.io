@@ -33,7 +33,7 @@ Desired position of the joints:
 ## IMU controller
 The first step in this project was getting IMU sensors on the different segments on a person's legs to control the exoskeleton using a position controller.
 
-{% include youtube.html video_id="RF24Zl4vB4U " width="50%" %}
+{% include youtube.html video_id="RF24Zl4vB4U " width="35%" %}
 {:refdef: style="text-align: center;"}
 _Video demonstration of the functional simulated SLAM algorithm_
 {: refdef}
