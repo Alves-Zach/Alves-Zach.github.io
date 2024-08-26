@@ -1,6 +1,6 @@
 ---
 layout: project
-title: Exoskeleton control
+title: Exoskeleton Control
 description: Python, C++, ROS Noetic, IMU, EMG
 image: assets/images/exoskeleton/demo.gif
 imagewidth: 0
@@ -11,21 +11,24 @@ order: 989
 
 ## Intro
 
-For my capstone project during the Master's of robotics program at Northwestern University I was given the opportunity to work at Shirley Ryan Ability Lab (SRALab) on a project to implement a method to control a lower body exoskeleton using a set of IMU/EMG sensors. My goal was to create an effective and easy to use control scheme that physical therapists at SRALab could use in a rehabilitation therapy session.
+For my capstone project during the Master's of robotics program at Northwestern University I was given the opportunity to work at Shirley Ryan Ability Lab on a project to implement a method to control a lower body exoskeleton using a set of IMU/EMG sensors. My goal was to create an effective and easy to use control scheme that physical therapists at SRALab could use in a rehabilitation therapy session.
 
-The current method of providing assistance to a stroke patient learning to walk again involves having a patient partially suspended on an elevated treadmill and the physical therapist grabbing the patient's legs one at a time to assist the patient to a more highly desired gait pattern. An improvement on this method would be to use a lower body exoskeleton pictured below that would be able to control each joint on the patient individually.
+The current method of providing assistance to a stroke patient learning to walk again involves having a patient partially suspended on an elevated treadmill and the physical therapist grabbing the patient's legs one at a time to assist the patient to a more highly desired gait pattern. An improvement on this method would be to use a lower body exoskeleton pictured below that would be able to control each joint on the patient individually. Work has been done by [Emek Barış Küçüktabak](https://github.com/emekBaris) on creating a system where both users wear an exoskeleton and are virtually coupled to allow both users to affect each other's gait pattern. Starting from where Emek left off I aimed to remove one of the exoskeletons from the setup, making it easier for the physical therapist to start and end sessions and attend to necessary tasks during a session. 
 
 ## Sensors
-The sensors used for this project are the trigno combination IMU and EMG sensors. They are placed on the legs as shown below, the color coding shows the purpose each sensor has.
+The sensors used for this project are the trigno combination IMU and EMG sensors that are placed on the legs as shown below, the color coding shows the purpose each sensor has.
 
 {:refdef: style="text-align: center;"}
 ![Trigno sensor placement](/assets/images/exoskeleton/IMUPlacementDiagram.png){: width="50%"}
 {: refdef}
 
-- The blue sensors measure the muscle activation of the gluteus maximus which are responsible for moving the hip joint backwards
-- The blue and red sensors provide both IMU and EMG readings to set the desired angle for the exoskeleton hip joints and the muscle activation for the front of the thigh muscles
-- The red sensors provide both IMU and EMG readings to set the desired angle for the exoskeleton hip joints and the muscle activation for the backof the thigh muscles 
-- The green sensors only provide IMU data to set the desired angle for the knee joints on the exoskeleton as the shin muscles only control the ankles
+Stiffness of the joints:
+- The hip stiffness is based on the EMG data from the front of the thigh and the gluteus maximus (Blue sensors)
+- The knee stiffness is based on the EMG data from the front and back of the thigh (Red sensors)
+
+Desired position of the joints:
+- The desired hip position is gotten from the IMU data on the front and back of the thighs (Red sensors)
+- The desired knee position is gotten from the IMU data on the shins (Green sensors)
 
 ## IMU controller
 The first step in this project was getting IMU sensors on the different segments on a person's legs to control the exoskeleton using a position controller.
@@ -40,11 +43,11 @@ This demo demonstrates the physical therapist on the right using IMU sensors att
 This method allows the physical therapist to easily command a desired gait pattern to a patient while enabling the therapist to easily put on and take off the sensors to attend to other tasks during a therapy session.
 
 ## EMG stiffness augmentation
-An important part of lower body rehabilitation using this setup is being able to vary controller stiffness to encourage the patient to tend towards more desirable gait patterns as the physical therapist sees fit. During test using only the IMUs controlling the desired position, an operator would control the proportional gain on the controller, changing it when the therapist said to do so. This method is functional but is more cumbersome and is less likely to find the correct stiffness. Also, different phases of a patient's gait pattern could require different levels of stiffness. This is why I aimed to augment the controller's proportional stiffness based on the muscle activation of the user wearing the IMU/EMG sensors.
+An important part of lower body rehabilitation using this setup is being able to vary controller stiffness to encourage the patient to tend towards more desirable gait patterns as the physical therapist sees fit. During test using only the IMUs controlling the desired position, an operator would control the proportional gain on the controller, changing it when the therapist said to do so. This method is functional but is more cumbersome and is less likely to find the correct stiffness. Also, different phases of a patient's gait pattern could require different levels of stiffness. This is why I aimed to augment the controller's proportional stiffness based on the muscle activation of the therapist wearing the IMU/EMG sensors.
 
 TODO: Add flowchart showing basic overview of the EMG -> stiffness pipeline
 
-The raw EMG data for each muscle comes in from the trigno_capture node, that gets converted into muscle activation data for each of the six muscles measured, those values then get converted into stiffness values for each of the 4 joints the exoskeleton controls. The method to convert muscle activation data to joint stiffness can be chosen from any listed below. All methods are available and can be chosen based on user preference
+The raw EMG data for each muscle comes in from the trigno_capture node, that gets converted into muscle activation data for each of the six muscles measured. Those values then get converted into stiffness values for each of the 4 joints the exoskeleton controls. The method to convert muscle activation data to joint stiffness can be chosen from any listed below. All methods are available and can be chosen based on user preference
 
 &emsp; - High-Low method: 
 
