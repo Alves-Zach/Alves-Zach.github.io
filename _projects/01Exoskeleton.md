@@ -68,7 +68,7 @@ TODO: Have a video demonstrating the different stiffness methods while walking o
 The final flowchart showing the used ROS nodes and data is as follows:
 
 {:refdef: style="text-align: center;"}
-![Final layout of ROS nodes and data flow](/assets/images/exoskeleton/ROSflow.png){: width="50%"}
+![Final layout of ROS nodes and data flow](/assets/images/exoskeleton/ROSflow.png){: width="75%"}
 {: refdef}
 
 ## Future work
