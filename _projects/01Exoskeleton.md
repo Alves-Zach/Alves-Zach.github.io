@@ -19,7 +19,7 @@ The current method of providing assistance to a stroke patient learning to walk 
 The sensors used for this project are the trigno combination IMU and EMG sensors that are placed on the legs as shown below, the color coding shows the purpose each sensor has.
 
 {:refdef: style="text-align: center;"}
-![Trigno sensor placement](/assets/images/exoskeleton/IMUPlacementDiagram.png){: width="50%"}
+![Trigno sensor placement](/assets/images/exoskeleton/IMUPlacementDiagram.png){: width="35%"}
 {: refdef}
 
 Stiffness of the joints:
@@ -33,7 +33,7 @@ Desired position of the joints:
 ## IMU controller
 The first step in this project was getting IMU sensors on the different segments on a person's legs to control the exoskeleton using a position controller.
 
-{% include youtube.html video_id="RF24Zl4vB4U " width="35%" %}
+{% include youtube.html video_id="RF24Zl4vB4U " width="50%" %}
 {:refdef: style="text-align: center;"}
 _Video demonstration of the functional simulated SLAM algorithm_
 {: refdef}
