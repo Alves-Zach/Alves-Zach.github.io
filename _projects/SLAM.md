@@ -4,12 +4,12 @@ title: SLAM
 description: C++, ROS 2, Rviz
 image: assets/images/SLAM/Demo.gif
 imagewidth: 0
-order: 989
+order: 3
 ---
 
 [GitHub Repository](https://github.com/Alves-Zach/SLAM.git){:target="_blank"}
 
-As part of my Master's of robotics program at Northwestern University I had 10 weeks to implement a **SLAM** (Simultaneous Localization And Mapping) algorithm from scratch. **SLAM** involves using sensors onboard a vehicle to detect landmarks to create a map of the surroundings and make traversing the environment easier.
+As part of my Masters of robotics program at Northwestern University I had 10 weeks to implement a **SLAM** (Simultaneous Localization And Mapping) algorithm from scratch. **SLAM** involves using sensors onboard a vehicle to detect landmarks to create a map of the surroundings and make traversing the environment easier.
 
 This implementation was meant to simulate a [**turtlebot3 burger**](https://www.turtlebot.com/turtlebot3/) which is a differential drive robot with a rotating lidar sensor on the top of the robot.
 

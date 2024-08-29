@@ -4,7 +4,7 @@ title: Train Controller
 description: Python, ROS 2, YOLOv8, CAD, Computer Vision
 image: assets/images/TrainController/main.gif
 imagewidth: 0
-order: 989
+order: 4
 ---
 
 [GitHub Repository](https://github.com/Alves-Zach/winter2024Project){:target="_blank"}

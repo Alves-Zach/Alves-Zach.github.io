@@ -4,45 +4,51 @@ title: Exoskeleton Control
 description: Python, C++, ROS Noetic, IMU, EMG
 image: assets/images/exoskeleton/demo.gif
 imagewidth: 0
-order: 989
+order: 1
 ---
 
 [GitHub Repository](https://github.com/Alves-Zach/imu_exo_control){:target="_blank"}
 
-## Intro
+The current method of providing assistance to a stroke patient learning to walk again involves having a patient partially suspended on an elevated treadmill and the physical therapist manually manipulates the patient's legs one at a time to help patient improve the patient's gait pattern. An improvement on this method would be to use a lower body exoskeleton that would be able to control each joint on the patient individually. Work has been done by [Emek Barış Küçüktabak](https://github.com/emekBaris) on creating a system where both users wear an exoskeleton and are virtually coupled to allow both users to affect each other's gait pattern. Starting from where Emek left off, I aimed to remove one of the exoskeletons from the setup to make physical therapy sessions requiring an exoskeleton more efficient.
 
-For my capstone project during the Master's of robotics program at Northwestern University I was given the opportunity to work at Shirley Ryan Ability Lab on a project to implement a method to control a lower body exoskeleton using a set of IMU/EMG sensors. My goal was to create an effective and easy to use control scheme that physical therapists at SRALab could use in a rehabilitation therapy session.
+TODO make this the supercut video
 
-The current method of providing assistance to a stroke patient learning to walk again involves having a patient partially suspended on an elevated treadmill and the physical therapist grabbing the patient's legs one at a time to assist the patient to a more highly desired gait pattern. An improvement on this method would be to use a lower body exoskeleton pictured below that would be able to control each joint on the patient individually. Work has been done by [Emek Barış Küçüktabak](https://github.com/emekBaris) on creating a system where both users wear an exoskeleton and are virtually coupled to allow both users to affect each other's gait pattern. Starting from where Emek left off I aimed to remove one of the exoskeletons from the setup, making it easier for the physical therapist to start and end sessions and attend to necessary tasks during a session. 
+{% include youtube.html video_id="RF24Zl4vB4U " width="50%" %}
+{:refdef: style="text-align: center;"}
+_Video demonstration of the physical therapist controlling an exoskeleton I am wearing_
+{: refdef}
 
-## Sensors
-The sensors used for this project are the trigno combination IMU and EMG sensors that are placed on the legs as shown below, the color coding shows the purpose each sensor has.
+This demo demonstrates the physical therapist on the right using Inertial Measurement Units (IMU) and sensors attached to her legs controlling the lower body exoskeleton I am wearing on the left.
+
+# Sensors
+The sensors used for this project are the Trigno combination IMU and EMG sensors that are placed on the legs. As shown below, the color coding highlights the purpose of each sensor. IMU sensors record the movement and rotation of the sensor, meaning if I fix an IMU to a user's leg
+
+TODO have picture of me with the IMUs on and readouts showing the angles of my legs
+
+The sensors are placed on the legs in the following locations.
 
 {:refdef: style="text-align: center;"}
 ![Trigno sensor placement](/assets/images/exoskeleton/IMUPlacementDiagram.png){: width="35%"}
 {: refdef}
 
-Stiffness of the joints:
-- The hip stiffness is based on the EMG data from the front of the thigh and the gluteus maximus (Blue sensors)
-- The knee stiffness is based on the EMG data from the front and back of the thigh (Red sensors)
+Muscle activation:
+- EMG data is collected from the quadriceps and the gluteus maximus (Blue sensors)
+- EMG data is collected from the quadriceps hamstrings (Red sensors)
 
 Desired position of the joints:
-- The desired hip position is gotten from the IMU data on the front and back of the thighs (Red sensors)
-- The desired knee position is gotten from the IMU data on the shins (Green sensors)
+- IMU data is collected from the quadriceps hamstrings (Red sensors)
+- Only IMU data is collected from the sensors on the shin (Green sensors)
 
-## IMU controller
+# IMU controller
 The first step in this project was getting IMU sensors on the different segments on a person's legs to control the exoskeleton using a position controller.
 
-{% include youtube.html video_id="RF24Zl4vB4U " width="50%" %}
-{:refdef: style="text-align: center;"}
-_Video demonstration of the functional simulated SLAM algorithm_
-{: refdef}
+TODO: Video showing suspended exoskeleton moving with me
 
-This demo demonstrates the physical therapist on the right using IMU sensors attached to her legs controlling the lower body exoskeleton I am wearing on the left. The quaternions that the IMUs generate are converted into joint angles in the sagittal plane of the therapist's body. Those joint angles are then fed to a position controller that commands motor torques based on the difference between the joint angles of the therapist and the joint angles of the exoskeleton.
+The quaternions that the IMUs generate are converted into joint angles in the sagittal plane of the therapist's body. Those joint angles are then fed to a position controller that commands motor torques based on the difference between the joint angles of the therapist and the joint angles of the exoskeleton.
 
 This method allows the physical therapist to easily command a desired gait pattern to a patient while enabling the therapist to easily put on and take off the sensors to attend to other tasks during a therapy session.
 
-## EMG stiffness augmentation
+# EMG stiffness augmentation
 An important part of lower body rehabilitation using this setup is being able to vary controller stiffness to encourage the patient to tend towards more desirable gait patterns as the physical therapist sees fit. During test using only the IMUs controlling the desired position, an operator would control the proportional gain on the controller, changing it when the therapist said to do so. This method is functional but is more cumbersome and is less likely to find the correct stiffness. Also, different phases of a patient's gait pattern could require different levels of stiffness. This is why I aimed to augment the controller's proportional stiffness based on the muscle activation of the therapist wearing the IMU/EMG sensors.
 
 TODO: Add flowchart showing basic overview of the EMG -> stiffness pipeline
@@ -65,14 +71,13 @@ The raw EMG data for each muscle comes in from the trigno_capture node, that get
 
 TODO: Have a video demonstrating the different stiffness methods while walking on a treadmill, it will be one video demonstrating them all one after another
 
-The final flowchart showing the used ROS nodes and data is as follows:
+The final flowchart showing the ROS nodes and data flow is as follows:
 
 {:refdef: style="text-align: center;"}
 ![Final layout of ROS nodes and data flow](/assets/images/exoskeleton/ROSflow.png){: width="75%"}
 {: refdef}
 
-## Future work
-
+# Future work
 This project has the opportunity to be improved on in the future, as the goal was to create an intuitive and easily controllable system for rehabilitation therapy, other methods for calculating stiffness could be more intuitive.
 
 ### Forearm contraction method
@@ -80,3 +85,6 @@ One method that I did not have the time to experiment with was using the contrac
 
 ### Percent of maximum output torque
 The current method of figuring out the amount that the user is contracting their muscles does not take into account the strength of each muscle relative to the other antagonist muscles. Using some calibration method that takes into account each muscle's strength would make a more accurate controller as relative stengths would be able to be used when calculating stiffness.
+
+**References:**
+[1] E. Küçüktabak, Y. Wen, M. Short, E. Demirbaş, K. Lynch, and J. Pons, “Virtual Physical Coupling of Two Lower-Limb Exoskeletons.” [Online]. Available: [https://arxiv.org/pdf/2307.06479](https://arxiv.org/pdf/2307.06479)

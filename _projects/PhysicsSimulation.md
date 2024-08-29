@@ -4,7 +4,7 @@ title:  2D Physics Simulation
 description: Python, Dynamics 
 image: assets/images/MECH314FinalProject/main.gif
 imagewidth: 0
-order: 989
+order: 5
 ---
 
 [GitHub Repository](https://github.com/Alves-Zach/NU-MECH314-Final){:target="_blank"}

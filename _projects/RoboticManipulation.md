@@ -4,7 +4,7 @@ title:  Pick and Place Robotic Manipulation
 description: Python, Controls Engineering, CoppeliaSim
 image: assets/images/MECH449FinalProject/main.gif
 imagewidth: 0
-order: 989
+order: 6
 ---
 
 [GitHub Repository](https://github.com/Alves-Zach/NU-MECH449-Final){:target="_blank"}

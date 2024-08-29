@@ -4,7 +4,7 @@ title: Shadowhands
 description: Python, ROS 2, Gazebo
 image: assets/images/shadowhands/main.gif
 imagewidth: 0
-order: 989
+order: 2
 ---
 
 [GitHub Repository](https://github.com/ME495-EmbeddedSystems/final-project-teleop){:target="_blank"}
