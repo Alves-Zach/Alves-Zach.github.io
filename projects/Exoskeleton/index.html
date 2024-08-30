@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Exoskeleton Control | Zachary Alves</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+</head>
+
+
+<body>
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	
+		<a href="https://alves-zach.github.io/" class="logo"><strong>Portfolio</strong> <span>Zachary Alves</span></a>
+	
+	
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+				
+					<li><a href="https://alves-zach.github.io/">Home</a></li>
+				
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="https://alves-zach.github.io//about.html">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="https://alves-zach.github.io//contact.html">Contact</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://alves-zach.github.io//projects.html">Projects</a></li>
+		    
+		
+		    
+		        <li><a href="https://alves-zach.github.io//resume.html">Resume</a></li>
+		    
+		
+	</ul>
+	<!--
+	<ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul>
+	-->
+</nav>
+ 
+    
+    
+<!-- Main -->
+<div id="main" class="alt">
+
+<!-- One -->
+<section id="one">
+	<div class="inner">
+		<header class="major">
+			<h1>Exoskeleton Control</h1>
+		</header>
+		<div><strong>Technologies:</strong> Python, C++, ROS Noetic, IMU, EMG</div><br>
+		
+			
+		
+		<p><a href="https://github.com/Alves-Zach/imu_exo_control" target="_blank">GitHub Repository</a></p>
+
+<p>The current method of providing assistance to a stroke patient learning to walk again involves having a patient partially suspended on an elevated treadmill and the physical therapist manually manipulates the patient’s legs one at a time to help patient improve the patient’s gait pattern. An improvement on this method would be to use a lower body exoskeleton that would be able to control each joint on the patient individually. Work has been done by <a href="https://github.com/emekBaris">Emek Barış Küçüktabak</a> on creating a system where both users wear an exoskeleton and are virtually coupled to allow both users to affect each other’s gait pattern. Starting from where Emek left off, I aimed to remove one of the exoskeletons from the setup to make physical therapy sessions requiring an exoskeleton more efficient.</p>
+
+<div style="width: 50%; margin: 0 auto;">
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/bffwe1fZwdw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+    </div>
+</div>
+<p style="text-align: center;"><em>Video demonstration of the physical therapist controlling an exoskeleton I am wearing</em></p>
+
+<p>This demo demonstrates the physical therapist on the right using Inertial Measurement Units (IMU) and sensors attached to her legs controlling the lower body exoskeleton I am wearing on the left.</p>
+
+<h1 id="sensors">Sensors</h1>
+<p>The sensors used for this project are the Trigno combination IMU and EMG sensors that are placed on the legs. As shown below, the color coding highlights the purpose of each sensor. IMU sensors record the movement and rotation of the sensor, meaning if I fix an IMU to a user’s leg, I can read the current angle of the user’s hip and knee joints.</p>
+
+<p>The sensors are placed on the legs in the following locations.</p>
+
+<p style="text-align: center;"><img src="/assets/images/exoskeleton/IMUPlacementDiagram.png" alt="Trigno sensor placement" width="35%" /></p>
+
+<p>Muscle activation:</p>
+<ul>
+  <li>EMG data is collected from the quadriceps and the gluteus maximus (Blue sensors)</li>
+  <li>EMG data is collected from the quadriceps hamstrings (Red sensors)</li>
+</ul>
+
+<p>Desired position of the joints:</p>
+<ul>
+  <li>IMU data is collected from the quadriceps hamstrings (Red sensors)</li>
+  <li>Only IMU data is collected from the sensors on the shin (Green sensors)</li>
+</ul>
+
+<h1 id="imu-controller">IMU controller</h1>
+<p>The first step in this project was getting IMU sensors on the different segments on a person’s legs to control the exoskeleton using a position controller.</p>
+
+<div style="width: 50%; margin: 0 auto;">
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/1IJePD3sRtk  " frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+    </div>
+</div>
+<p style="text-align: center;"><em>Video demonstration of me controlling a simulated exo skeleton using the IMU sensors on my legs</em></p>
+
+<p>The video above shows me controlling a simulated exoskeleton using the IMU Trigno sensors on my legs. A simulated exoskeleton was used for ease of viewing.</p>
+
+<p>The quaternions that the IMUs generate are converted into joint angles in the sagittal plane of the therapist’s body. Those joint angles are then fed to a position controller that commands motor torques based on the difference between the joint angles of the therapist and the joint angles of the exoskeleton.</p>
+
+<p>This method allows the physical therapist to easily command a desired gait pattern to a patient while enabling the therapist to easily put on and take off the sensors to attend to other tasks during a therapy session.</p>
+
+<h1 id="emg-stiffness-augmentation">EMG stiffness augmentation</h1>
+<p>An important part of lower body rehabilitation using this setup is being able to vary controller stiffness to encourage the patient to tend towards more desirable gait patterns as the physical therapist sees fit. During test using only the IMUs controlling the desired position, an operator would control the proportional gain on the controller, changing it when the therapist said to do so. This method is functional but is more cumbersome and is less likely to find the correct stiffness. Also, different phases of a patient’s gait pattern could require different levels of stiffness. This is why I aimed to augment the controller’s proportional stiffness based on the muscle activation of the therapist wearing the IMU/EMG sensors.</p>
+
+<p style="text-align: center;"><img src="/assets/images/exoskeleton/EMGPipeline.png" alt="EMG pipeline graphs" title="EMG pipeline graphs" width="75%" /></p>
+
+<p>The graphs above show the EMG to stiffness pipeline. The first graph shows EMG readings as they are received from the sensors in millivolts. Then they are converted into muscle activation percentages for each muscle based on individual user calibration values obtained during a calibration process. From there the muscle activation values for antagonist muscles are combined using the selected stiffness calculation method to determine the stiffness value for that joint. In the case above, the muscles on the front and back of the thigh control the flexion and extension of the knee joint so those muscle activation values are used to calculate knee stiffness.</p>
+
+<p>  - High-Low method:</p>
+
+<p>    <img src="/assets/images/exoskeleton/HighLow.png" alt="High Low equation" title="High Low equation" /></p>
+
+<p>    Where σ is an array containing maximum voluntary contraction (MVC) readings for both muscles that control that joint</p>
+
+<p>  - Maximum method:</p>
+
+<p>    Takes the maximum of the two MVC readings and converts that directly to the stiffness multiplier for the controller.</p>
+
+<p>  - Minimum method:</p>
+
+<p>    Takes the minimum of the two MVC readings and converts that directly to the stiffness multiplier for the controller.</p>
+
+<p>The final flowchart showing the ROS nodes and data flow is as follows:</p>
+
+<p style="text-align: center;"><img src="/assets/images/exoskeleton/ROSflow.png" alt="Final layout of ROS nodes and data flow" width="75%" /></p>
+
+<h1 id="future-work">Future work</h1>
+<p>This project has the opportunity to be improved on in the future, as the goal was to create an intuitive and easily controllable system for rehabilitation therapy, other methods for calculating stiffness could be more intuitive.</p>
+
+<h3 id="forearm-contraction-method">Forearm contraction method</h3>
+<p>One method that I did not have the time to experiment with was using the contraction of another part of the body, such as the forearm, to augment joint stiffness. During my experiments I found it can be difficult to flex parts of the leg enough to significantly change the perceived muscle activation without significantly changing the kinematics of my gait. Using the muscle activation of another muscle not on the leg would be a creative way to avoid this issue.</p>
+
+<h3 id="percent-of-maximum-output-torque">Percent of maximum output torque</h3>
+<p>The current method of figuring out the amount that the user is contracting their muscles does not take into account the strength of each muscle relative to the other antagonist muscles. Using some calibration method that takes into account each muscle’s strength would make a more accurate controller as relative stengths would be able to be used when calculating stiffness.</p>
+
+<p><strong>References:</strong>
+[1] E. Küçüktabak, Y. Wen, M. Short, E. Demirbaş, K. Lynch, and J. Pons, “Virtual Physical Coupling of Two Lower-Limb Exoskeletons.” [Online]. Available: <a href="https://arxiv.org/pdf/2307.06479">https://arxiv.org/pdf/2307.06479</a></p>
+
+	</div>
+</section>
+
+</div>
+
+    <!-- Contact -->
+<!--
+<section id="contact">
+	<div class="inner">
+		<section>
+			<form action="https://formspree.io/zacharyalves2024@u.northwestern.edu" method="POST">
+				<div class="field half first">
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" />
+				</div>
+				<div class="field half">
+					<label for="email">Email</label>
+					<input type="text" name="_replyto" id="email" />
+				</div>
+				<div class="field">
+					<label for="message">Message</label>
+					<textarea name="message" id="message" rows="6"></textarea>
+				</div>
+				<ul class="actions">
+					<li><input type="submit" value="Send Message" class="special" /></li>
+					<li><input type="reset" value="Clear" /></li>
+				</ul>
+			</form>
+		</section>
+		<section class="split">
+			<section>
+				<div class="contact-method">
+					<span class="icon alt fa-envelope"></span>
+					<h3>Email</h3>
+					<a href="mailto:zacharyalves2024@u.northwestern.edu">zacharyalves2024@u.northwestern.edu</a>
+				</div>
+			</section>
+			<section>
+				<div class="contact-method">
+					<span class="icon alt fa-phone"></span>
+					<h3>Phone</h3>
+					<a href="tel:(720) 215-1442">(720) 215-1442</a>
+				</div>
+			</section>
+			<section>
+				<div class="contact-method">
+					<span class="icon alt fa-home"></span>
+					<h3>Address</h3>
+					<span>
+					
+					
+					    Chicago,
+					
+					
+					    IL 
+					
+					
+					
+					    United States of America
+					
+					</span>
+				</div>
+			</section>
+		</section>
+	</div>
+</section>
+-->
+<!-- Footer -->
+	<footer id="footer">
+		<div class="inner">
+			<ul class="icons">
+    <li><a href="mailto:zacharyalves2024@u.northwestern.edu" class="icon alt fa-envelope"></a></li>
+    <li><a href="tel:(720) 215-1442" class="icon alt fa-phone"></a></li>
+    
+        
+            <li>
+                <a href="https://www.linkedin.com/in/zachary-alves-b186b2159/" class="icon alt fa-linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <span class="label">LinkedIn</span>
+                </a>
+            </li>
+        
+    
+        
+            <li>
+                <a href="https://github.com/Alves-Zach" class="icon alt fa-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <span class="label">GitHub</span>
+                </a>
+            </li>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</ul>
+			<!--
+			<ul class="icons">
+				<li><a href="mailto:zacharyalves2024@u.northwestern.edu" class="icon alt fa-envelope"></a></li>
+				<li><a href="tel:(720) 215-1442" class="icon alt fa-phone"></a></li>
+				
+					
+						<li>
+							<a href="https://www.linkedin.com/in/zachary-alves-b186b2159/" class="icon alt fa-linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+								<span class="label">LinkedIn</span>
+							</a>
+						</li>
+					
+				
+					
+						<li>
+							<a href="https://github.com/Alves-Zach" class="icon alt fa-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+								<span class="label">GitHub</span>
+							</a>
+						</li>
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+			</ul>
+			-->
+			<ul class="copyright">
+				<li>&copy; <script>document.write(new Date().getFullYear())</script> Zachary Alves </li>
+				<li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
+				<li>Jekyll integration: <a href="http://andrewbanchi.ch" target="_blank">Andrew Banchich</a></li>
+
+			</ul>
+		</div>
+	</footer>
+
+</div>
+
+<!-- Scripts -->
+	<script src="https://alves-zach.github.io//assets/js/jquery.min.js"></script>
+	<script src="https://alves-zach.github.io//assets/js/jquery.scrolly.min.js"></script>
+	<script src="https://alves-zach.github.io//assets/js/jquery.scrollex.min.js"></script>
+	<script src="https://alves-zach.github.io//assets/js/skel.min.js"></script>
+	<script src="https://alves-zach.github.io//assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="https://alves-zach.github.io//assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="https://alves-zach.github.io//assets/js/main.js"></script>
+	<!-- <script src="/js/zepto.min.js"></script>
+	<script>jQuery = Zepto;</script> -->
+	<script src="https://alves-zach.github.io//assets/js/jquery.details.min.js"></script>
+	<script>$('details').details();</script>
+
+</body>
+
+</html>
