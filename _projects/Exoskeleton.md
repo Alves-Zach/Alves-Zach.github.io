@@ -52,9 +52,11 @@ This method allows the physical therapist to easily command a desired gait patte
 # EMG stiffness augmentation
 An important part of lower body rehabilitation using this setup is being able to vary controller stiffness to encourage the patient to tend towards more desirable gait patterns as the physical therapist sees fit. During test using only the IMUs controlling the desired position, an operator would control the proportional gain on the controller, changing it when the therapist said to do so. This method is functional but is more cumbersome and is less likely to find the correct stiffness. Also, different phases of a patient's gait pattern could require different levels of stiffness. This is why I aimed to augment the controller's proportional stiffness based on the muscle activation of the therapist wearing the IMU/EMG sensors.
 
-![EMG pipeline graphs](/assets/images/exoskeleton/EMGPipeline.png "EMG pipeline graphs")
+{:refdef: style="text-align: center;"}
+![EMG pipeline graphs](/assets/images/exoskeleton/EMGPipeline.png "EMG pipeline graphs"){: width="75%"}
+{: refdef}
 
-The graphs above show the EMG to stiffness pipeline. The first graph shows EMG readings as they are received from the sensors in mV. Then they are converted into muscle activation percentages for each muscle based on individual user calibration values obtained during a calibration process. From there the muscle activation values for antagonist muscles are combined using the selected stiffness calculation method to determine the stiffness value for that joint. In the case above, the muscles on the front and back of the thigh control the flexion and extension of the knee joint so those muscle activation values are used to calculate knee stiffness. 
+The graphs above show the EMG to stiffness pipeline. The first graph shows EMG readings as they are received from the sensors in millivolts. Then they are converted into muscle activation percentages for each muscle based on individual user calibration values obtained during a calibration process. From there the muscle activation values for antagonist muscles are combined using the selected stiffness calculation method to determine the stiffness value for that joint. In the case above, the muscles on the front and back of the thigh control the flexion and extension of the knee joint so those muscle activation values are used to calculate knee stiffness. 
 
 &emsp; - High-Low method: 
 
