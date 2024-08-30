@@ -11,9 +11,7 @@ order: 1
 
 The current method of providing assistance to a stroke patient learning to walk again involves having a patient partially suspended on an elevated treadmill and the physical therapist manually manipulates the patient's legs one at a time to help patient improve the patient's gait pattern. An improvement on this method would be to use a lower body exoskeleton that would be able to control each joint on the patient individually. Work has been done by [Emek Barış Küçüktabak](https://github.com/emekBaris) on creating a system where both users wear an exoskeleton and are virtually coupled to allow both users to affect each other's gait pattern. Starting from where Emek left off, I aimed to remove one of the exoskeletons from the setup to make physical therapy sessions requiring an exoskeleton more efficient.
 
-TODO make this the supercut video
-
-{% include youtube.html video_id="RF24Zl4vB4U " width="50%" %}
+{% include youtube.html video_id="bffwe1fZwdw" width="50%" %}
 {:refdef: style="text-align: center;"}
 _Video demonstration of the physical therapist controlling an exoskeleton I am wearing_
 {: refdef}
@@ -21,9 +19,7 @@ _Video demonstration of the physical therapist controlling an exoskeleton I am w
 This demo demonstrates the physical therapist on the right using Inertial Measurement Units (IMU) and sensors attached to her legs controlling the lower body exoskeleton I am wearing on the left.
 
 # Sensors
-The sensors used for this project are the Trigno combination IMU and EMG sensors that are placed on the legs. As shown below, the color coding highlights the purpose of each sensor. IMU sensors record the movement and rotation of the sensor, meaning if I fix an IMU to a user's leg
-
-TODO have picture of me with the IMUs on and readouts showing the angles of my legs
+The sensors used for this project are the Trigno combination IMU and EMG sensors that are placed on the legs. As shown below, the color coding highlights the purpose of each sensor. IMU sensors record the movement and rotation of the sensor, meaning if I fix an IMU to a user's leg, I can read the current angle of the user's hip and knee joints.
 
 The sensors are placed on the legs in the following locations.
 
@@ -42,7 +38,12 @@ Desired position of the joints:
 # IMU controller
 The first step in this project was getting IMU sensors on the different segments on a person's legs to control the exoskeleton using a position controller.
 
-TODO: Video showing suspended exoskeleton moving with me
+{% include youtube.html video_id="1IJePD3sRtk  " width="50%" %}
+{:refdef: style="text-align: center;"}
+_Video demonstration of me controlling a simulated exo skeleton using the IMU sensors on my legs_
+{: refdef}
+
+The video above shows me controlling a simulated exoskeleton using the IMU Trigno sensors on my legs. A simulated exoskeleton was used for ease of viewing.
 
 The quaternions that the IMUs generate are converted into joint angles in the sagittal plane of the therapist's body. Those joint angles are then fed to a position controller that commands motor torques based on the difference between the joint angles of the therapist and the joint angles of the exoskeleton.
 
@@ -51,9 +52,9 @@ This method allows the physical therapist to easily command a desired gait patte
 # EMG stiffness augmentation
 An important part of lower body rehabilitation using this setup is being able to vary controller stiffness to encourage the patient to tend towards more desirable gait patterns as the physical therapist sees fit. During test using only the IMUs controlling the desired position, an operator would control the proportional gain on the controller, changing it when the therapist said to do so. This method is functional but is more cumbersome and is less likely to find the correct stiffness. Also, different phases of a patient's gait pattern could require different levels of stiffness. This is why I aimed to augment the controller's proportional stiffness based on the muscle activation of the therapist wearing the IMU/EMG sensors.
 
-TODO: Add flowchart showing basic overview of the EMG -> stiffness pipeline
+![EMG pipeline graphs](/assets/images/exoskeleton/EMGPipeline.png "EMG pipeline graphs")
 
-The raw EMG data for each muscle comes in from the trigno_capture node, that gets converted into muscle activation data for each of the six muscles measured. Those values then get converted into stiffness values for each of the 4 joints the exoskeleton controls. The method to convert muscle activation data to joint stiffness can be chosen from any listed below. All methods are available and can be chosen based on user preference
+The graphs above show the EMG to stiffness pipeline. The first graph shows EMG readings as they are received from the sensors in mV. Then they are converted into muscle activation percentages for each muscle based on individual user calibration values obtained during a calibration process. From there the muscle activation values for antagonist muscles are combined using the selected stiffness calculation method to determine the stiffness value for that joint. In the case above, the muscles on the front and back of the thigh control the flexion and extension of the knee joint so those muscle activation values are used to calculate knee stiffness. 
 
 &emsp; - High-Low method: 
 
@@ -68,8 +69,6 @@ The raw EMG data for each muscle comes in from the trigno_capture node, that get
 &emsp; - Minimum method:
 
 &emsp;&emsp;&emsp; Takes the minimum of the two MVC readings and converts that directly to the stiffness multiplier for the controller.
-
-TODO: Have a video demonstrating the different stiffness methods while walking on a treadmill, it will be one video demonstrating them all one after another
 
 The final flowchart showing the ROS nodes and data flow is as follows:
 
