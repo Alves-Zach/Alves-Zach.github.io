@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Shadowhands | Zachary Alves</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+	<!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+</head>
+
+
+<body>
+
+    <!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header -->
+<header id="header">
+	
+		<a href="https://alves-zach.github.io/" class="logo"><strong>Portfolio</strong> <span>Zachary Alves</span></a>
+	
+	
+	<nav>
+		<a href="#menu">Menu</a>
+	</nav>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+	<ul class="links">
+        
+		    
+		
+		    
+		
+		    
+		
+		    
+				
+					<li><a href="https://alves-zach.github.io/">Home</a></li>
+				
+	    	
+		
+		    
+		
+		    
+		
+		    
+		
+		
+		    
+		
+		    
+		        <li><a href="https://alves-zach.github.io//about.html">About Me</a></li>
+		    
+		
+		    
+		        <li><a href="https://alves-zach.github.io//contact.html">Contact</a></li>
+		    
+		
+		    
+		
+		    
+		        <li><a href="https://alves-zach.github.io//projects.html">Projects</a></li>
+		    
+		
+		    
+		        <li><a href="https://alves-zach.github.io//resume.html">Resume</a></li>
+		    
+		
+	</ul>
+	<!--
+	<ul class="actions vertical">
+		<li><a href="#" class="button special fit">Get Started</a></li>
+		<li><a href="#" class="button fit">Log In</a></li>
+	</ul>
+	-->
+</nav>
+ 
+    
+    
+<!-- Main -->
+<div id="main" class="alt">
+
+<!-- One -->
+<section id="one">
+	<div class="inner">
+		<header class="major">
+			<h1>Shadowhands</h1>
+		</header>
+		<div><strong>Technologies:</strong> Python, ROS 2, Gazebo</div><br>
+		
+			
+		
+		<p><a href="https://github.com/ME495-EmbeddedSystems/final-project-teleop" target="_blank">GitHub Repository</a></p>
+
+<p>As our final project for my Embedded Systems in Robotics class at Northwestern University my team decided to utilize the <strong>Shadow Hand</strong> robot hands attached to <strong>ABB</strong> seven-DOF robot arms to manipulate objects detected via computer vision.</p>
+
+<p>Alongside the <strong>ABB</strong> robots, we created a user-end virtual simulation of the environment utilizing <strong>RVIZ</strong> and <strong>Gazebo</strong> where the user could wear a <strong>Haptics</strong> glove and have a <strong>Franka</strong> arm attached to their wrist.</p>
+
+<p style="text-align: center;"><img src="/assets/images/shadowhands/BlockDiagram.png" alt="The transforms of each ring shown in RVIZ" width="50%" /></p>
+<p style="text-align: center;"><em>The transforms of each ring shown in RVIZ.</em></p>
+
+<details><summary><strong><u>Table of Contents</u></strong></summary>
+<ul>
+  <li><a href="#manipulator-end">Manipulator End</a></li>
+  <li><a href="#user-end">User End</a></li>
+  <li><a href="#future-work">Future Work</a></li>
+</ul>
+</details>
+
+<hr />
+
+<h2 id="manipulator-end">Manipulator End</h2>
+<p>The manipulator end has both a computer vision and robotic manipulator portion to it. The computer vision side detects the locations of the toy rings on the desk and sends those positions to the motion planner that creates a series of actions for the robotic arm to execute to pick up the rings in order.</p>
+
+<p>The computer vision on this end of the project utilizes color detection to detect which pixels correspond to which ring. By using other CV methods, such as contouring, the system more accurately determines the edges of each ring and then the center of each ring based on the average location of pixels of the same color as the rings.</p>
+
+<p style="text-align: center;"><img src="/assets/images/shadowhands/cv.png" alt="The transforms of each ring shown in RVIZ" width="50%" /></p>
+<p style="text-align: center;"><em>The transforms of each ring shown in RVIZ.</em></p>
+
+<p>Once the ring locations are known relative to the camera, known positions and rotations from the camera to the robot base are used to compute the locations of the rings relative to the robot. These locations are then sent to the motion planner to create a series of actions that will pick up each ring in order and stack them on the post in the center of the desk.</p>
+
+<h2 id="user-end">User End</h2>
+<p>The user end consisted of three parts: a haptic feedback glove capable of providing a gripping feedback to the user, a <strong>Franka</strong> seven-DOF arm attached to the user’s wrist to track position in 3D space and provide weight feedback, and a virtual simulation in Gazebo.</p>
+
+<p>Because this project was intended to be a platform for delayed tele-operation, a locally run physics simulator was needed to provide fast and accurate feedback to the user as in an actual use case the user would be much further away from the manipulator end thus incurring much more delay in feedback. Gazebo was the simulator our team decided on because of its integration with <strong>ROS2</strong>.</p>
+
+<p>To reduce feedback delay, we utilized a locally run physics simulator called <strong>Gazebo</strong> due to its accuracy and integration with <strong>ROS2</strong>. Since the user would be much further from the manipulator end in an actual use case, <strong>Gazebo</strong> provides reduced feedback delay when compared to the delay that would be incurred over</p>
+
+<p>Though Gazebo is a physics simulator, it does not allow users to program robot positions directly into the simulation. Our simulated hand had to take commands from a controller where the current real-world positions of the user’s hand and fingers were the goal positions the controller was aiming for.</p>
+
+<div style="width: 50%; margin: 0 auto;">
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/qrdn6vsrmfs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+    </div>
+</div>
+<p style="text-align: center;"><em>Me using the haptic glove to demo the user feedback.</em></p>
+
+<p>The <strong>Franka</strong> robot that is attached to my wrist is constantly using kinematic equations to determine the location and rotation of my wrist relative to the base of the robot. That data is then sent to the Gazebo controller and used as desired positions.</p>
+
+<div style="width: 50%; margin: 0 auto;">
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/QWVU5sAlT2Q" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+    </div>
+</div>
+<p style="text-align: center;"><em>The corresponding gazebo simulation using my hand and finger motions as input.</em></p>
+
+<h2 id="future-work">Future Work</h2>
+
+<h3 id="improving-controller-tuning"><strong>Improving controller tuning.</strong></h3>
+
+<p>While the physics simulator is very good at simulating freely moving objects such as the rings, the controller that moves the hand around the scene would need tuning before the project could be used in an actual scenario. Though tuning the controller was out of scope for a project this size, <strong>ROS2</strong> contains tools to tune controllers and <strong>Gazebo</strong> has the capability to make the hand model more accurate so that the random flipping wouldn’t occur.</p>
+
+<h3 id="saving-user-input-motion-for-future-playback"><strong>Saving user input motion for future playback</strong></h3>
+
+<p>Future iterations of this project would need to include trajectory storing so that it could be run later on the manipulator end of the project. For example, if the user makes a mistake in their execution, that motion data could simply be deleted and not sent to the manipulator end, where as a directly controlled manipulator would be more prone to user errors.</p>
+
+	</div>
+</section>
+
+</div>
+
+    <!-- Contact -->
+<!--
+<section id="contact">
+	<div class="inner">
+		<section>
+			<form action="https://formspree.io/zacharyalves2024@u.northwestern.edu" method="POST">
+				<div class="field half first">
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" />
+				</div>
+				<div class="field half">
+					<label for="email">Email</label>
+					<input type="text" name="_replyto" id="email" />
+				</div>
+				<div class="field">
+					<label for="message">Message</label>
+					<textarea name="message" id="message" rows="6"></textarea>
+				</div>
+				<ul class="actions">
+					<li><input type="submit" value="Send Message" class="special" /></li>
+					<li><input type="reset" value="Clear" /></li>
+				</ul>
+			</form>
+		</section>
+		<section class="split">
+			<section>
+				<div class="contact-method">
+					<span class="icon alt fa-envelope"></span>
+					<h3>Email</h3>
+					<a href="mailto:zacharyalves2024@u.northwestern.edu">zacharyalves2024@u.northwestern.edu</a>
+				</div>
+			</section>
+			<section>
+				<div class="contact-method">
+					<span class="icon alt fa-phone"></span>
+					<h3>Phone</h3>
+					<a href="tel:(720) 215-1442">(720) 215-1442</a>
+				</div>
+			</section>
+			<section>
+				<div class="contact-method">
+					<span class="icon alt fa-home"></span>
+					<h3>Address</h3>
+					<span>
+					
+					
+					    Chicago,
+					
+					
+					    IL 
+					
+					
+					
+					    United States of America
+					
+					</span>
+				</div>
+			</section>
+		</section>
+	</div>
+</section>
+-->
+<!-- Footer -->
+	<footer id="footer">
+		<div class="inner">
+			<ul class="icons">
+    <li><a href="mailto:zacharyalves2024@u.northwestern.edu" class="icon alt fa-envelope"></a></li>
+    <li><a href="tel:(720) 215-1442" class="icon alt fa-phone"></a></li>
+    
+        
+            <li>
+                <a href="https://www.linkedin.com/in/zachary-alves-b186b2159/" class="icon alt fa-linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <span class="label">LinkedIn</span>
+                </a>
+            </li>
+        
+    
+        
+            <li>
+                <a href="https://github.com/Alves-Zach" class="icon alt fa-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <span class="label">GitHub</span>
+                </a>
+            </li>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</ul>
+			<!--
+			<ul class="icons">
+				<li><a href="mailto:zacharyalves2024@u.northwestern.edu" class="icon alt fa-envelope"></a></li>
+				<li><a href="tel:(720) 215-1442" class="icon alt fa-phone"></a></li>
+				
+					
+						<li>
+							<a href="https://www.linkedin.com/in/zachary-alves-b186b2159/" class="icon alt fa-linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+								<span class="label">LinkedIn</span>
+							</a>
+						</li>
+					
+				
+					
+						<li>
+							<a href="https://github.com/Alves-Zach" class="icon alt fa-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+								<span class="label">GitHub</span>
+							</a>
+						</li>
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+					
+				
+			</ul>
+			-->
+			<ul class="copyright">
+				<li>&copy; <script>document.write(new Date().getFullYear())</script> Zachary Alves </li>
+				<li>Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a></li>
+				<li>Jekyll integration: <a href="http://andrewbanchi.ch" target="_blank">Andrew Banchich</a></li>
+
+			</ul>
+		</div>
+	</footer>
+
+</div>
+
+<!-- Scripts -->
+	<script src="https://alves-zach.github.io//assets/js/jquery.min.js"></script>
+	<script src="https://alves-zach.github.io//assets/js/jquery.scrolly.min.js"></script>
+	<script src="https://alves-zach.github.io//assets/js/jquery.scrollex.min.js"></script>
+	<script src="https://alves-zach.github.io//assets/js/skel.min.js"></script>
+	<script src="https://alves-zach.github.io//assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="https://alves-zach.github.io//assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="https://alves-zach.github.io//assets/js/main.js"></script>
+	<!-- <script src="/js/zepto.min.js"></script>
+	<script>jQuery = Zepto;</script> -->
+	<script src="https://alves-zach.github.io//assets/js/jquery.details.min.js"></script>
+	<script>$('details').details();</script>
+
+</body>
+
+</html>
